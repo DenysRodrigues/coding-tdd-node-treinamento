@@ -13,7 +13,8 @@
     "express",
     "mongobd",
     "chai",
-    "mocha"
+    "mocha",
+    "tdd"
   ],
   "author": "Denys Rodrigues",
   "license": "MIT",

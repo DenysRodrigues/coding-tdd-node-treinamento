@@ -12,29 +12,26 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const port = process.env.PORT || 8000;
-const configdb = require('./src/config/database');
-//const routes = require('./src/routes/routes');
+const dbConfig = require('./config/database');
 
-//mongoose.Promise = global.Promise;
+mongoose.connect(dbConfig.url, { useNewUrlParser: true }).then(() => {
+    Console.log('Base de dados conectado com sucesso!');
+}).catch((err)=> {
+    console.log('Não conseguimos conectar com a Base de Dados. Fechando agora...:', err);
+});
 
-//mongoose.connect(configdb.url, {useNewUrlParser: true})
-const db = mongoose.connection;
-db.on('Error', console.error.bind(console, 'Erro ao realizar a conexão com a base de Dados..;: '));
-
-/**if (configDb.util.getEnv('NODE_ENV') !== 'Test'){
-    app.use(morgan('combined'));
-} */
-
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true}));
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: 'application/json'}));
 
-// ROTA DEFAULT: http://localhost:8000/v1
-app.get('/v1',(req, res) => res.json({message: 'Sejam Bem-Vindos(as) a API: Live Coding - Glaucia Lemos!'}));
+// ROTA DEFAULT: http://localhost:8000/
+app.get('/',(req, res) => {
+    res.json({message: 'Sejam Bem-Vindos(as) a API: Live Coding - Denys R!'});
+});
 
-app.listen(port);
-console.log(`Aplicação executando na porta...: ${port}`);
+//Aqui estamos fazendo a chamada das Rotas da api 'POST'
+//require('./app/routes/routes')(app);
+app.listen(8000, () => {
+    console.log('Aplicação sendo executada na porta 8000')
+})
 
 module.exports = app;
