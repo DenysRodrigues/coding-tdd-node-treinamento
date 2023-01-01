@@ -20,7 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "config": "^3.0.1",
+    "config": "^3.3.8",
     "eslint-formatter-friendly": "^6.0.0",
     "eslint-formatter-pretty": "^2.1.1",
     "express": "^4.16.4",
